@@ -96,12 +96,12 @@
     </div>
    
 	<!-- Modal -->
-	<div class="modal fade" id="myPupup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="ipPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">DynamicDNS Update URLs</h4>
+	        <h4 class="modal-title" id="ipModalLabel">DynamicDNS Update URLs</h4>
 	      </div>
 	      <div class="modal-body">
 			<strong>Update-URL for clients knowing their own IP</strong><br/>
@@ -122,16 +122,16 @@
 	  </div>
 	</div>
 
-    <!-- CNAME Modal -->
-    <div class="modal fade" id="cnamePopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- CNAME / DNAME Modal -->
+    <div class="modal fade" id="namePopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="cnameModalLabel">DynamicDNS Update URLs</h4>
+                    <h4 class="modal-title" id="nameModalLabel">DynamicDNS Update URLs</h4>
                 </div>
                 <div class="modal-body">
-                    <strong>Update-URL for changing CNAME</strong><br/>
+                    <strong>Update-URL for changing {{uurl.type}}</strong><br/>
                     <a href="{{uurl.manu}}" target="_blank">{{uurl.manu}}</a>
                 </div>
                 <div class="modal-footer">

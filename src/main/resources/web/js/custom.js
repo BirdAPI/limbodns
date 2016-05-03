@@ -61,7 +61,7 @@ theApp.controller('MainCtrl', function ($scope,$http) {
 	$scope.newrec.type = 'A';
 	$scope.newrec.value = '';
 	
-	$scope.types = ["A", "AAAA", "CNAME"];
+	$scope.types = ["A", "AAAA", "CNAME", "DNAME"];
 	
 	$scope.uurl = new Object();
 	$scope.uurl.auto = '';
@@ -132,27 +132,28 @@ theApp.controller('MainCtrl', function ($scope,$http) {
 		if("A" == valueRecord.type) {
 			$scope.uurl.manu = $scope.uurl.auto + "/127.0.0.1";
 			$scope.uurl.wget = '--inet4-only';
-		}
-		if("AAAA" == valueRecord.type) {
+			$('#ipPopup').modal('show');
+		} else if("AAAA" == valueRecord.type) {
 			$scope.uurl.manu = $scope.uurl.auto + "/2001:0db8:85a3:0000:0000:8a2e:0370:7334";
 			$scope.uurl.wget = '--inet6-only';
-		}
-
-		if("CNAME" == valueRecord.type) {
+			$('#ipPopup').modal('show');
+		} else if("CNAME" == valueRecord.type) {
 			$scope.uurl.manu = $scope.uurl.auto + "/CNAME_HERE";
-			$scope.uurl.wget = '';
-			$('#cnamePopup').modal('show');
-		} else {
-			$('#myPupup').modal('show');
+			$scope.uurl.type = 'CNAME';
+			$('#namePopup').modal('show');
+		} else if("DNAME" == valueRecord.type) {
+			$scope.uurl.manu = $scope.uurl.auto + "/DNAME_HERE";
+			$scope.uurl.type = 'DNAME';
+			$('#namePopup').modal('show');
 		}
 	}
 	
 	// Init modal:
-	$('#myPupup').modal({
+	$('#ipPopup').modal({
 		show: false
 	})
 
-	$('#cnamePopup').modal({
+	$('#namePopup').modal({
 		show: false
 	})
 

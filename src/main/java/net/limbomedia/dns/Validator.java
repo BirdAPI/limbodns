@@ -47,7 +47,7 @@ public class Validator {
 	
 	public static void validateType(XType value) throws ValidationException {
 		if(value == null) {
-			throw new ValidationException("Type cannot be empty. Allowed values: A, AAAA, CNAME.", null);
+			throw new ValidationException("Type cannot be empty. Allowed values: A, AAAA, CNAME, DNAME.", null);
 		}
 	}
 	

@@ -14,16 +14,7 @@ import net.limbomedia.dns.model.XZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xbill.DNS.AAAARecord;
-import org.xbill.DNS.ARecord;
-import org.xbill.DNS.Address;
-import org.xbill.DNS.DClass;
-import org.xbill.DNS.NSRecord;
-import org.xbill.DNS.Name;
-import org.xbill.DNS.Record;
-import org.xbill.DNS.SOARecord;
-import org.xbill.DNS.CNAMERecord;
-import org.xbill.DNS.Zone;
+import org.xbill.DNS.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -81,13 +72,14 @@ public class ZoneManagerImpl implements ZoneManager, ZoneProvider {
 				Record r = null;
 				if(XType.A.equals(xrec.getType())) {
 					r = new ARecord(new Name(xrec.getName(),nameZone), DClass.IN, 300L, Address.getByAddress(xrec.getValue()));
-				}
-				if(XType.AAAA.equals(xrec.getType())) {
+				} else if(XType.AAAA.equals(xrec.getType())) {
 					r = new AAAARecord(new Name(xrec.getName(),nameZone), DClass.IN, 300L, Address.getByAddress(xrec.getValue()));
-				}
-				if (XType.CNAME.equals(xrec.getType())){
+				} else if (XType.CNAME.equals(xrec.getType())){
 					r = new CNAMERecord(new Name(xrec.getName(),nameZone), DClass.IN, 300L, new Name(xrec.getValue()));
+				} else if (XType.DNAME.equals(xrec.getType())){
+					r = new DNAMERecord(new Name(xrec.getName(),nameZone), DClass.IN, 300L, new Name(xrec.getValue()));
 				}
+
 				if(r == null) {
 					L.error("Invalid/Unsupported record found: " + xrec);
 				}
