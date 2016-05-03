@@ -61,7 +61,7 @@ theApp.controller('MainCtrl', function ($scope,$http) {
 	$scope.newrec.type = 'A';
 	$scope.newrec.value = '';
 	
-	$scope.types = ["A", "AAAA"];
+	$scope.types = ["A", "AAAA", "CNAME"];
 	
 	$scope.uurl = new Object();
 	$scope.uurl.auto = '';
@@ -137,16 +137,22 @@ theApp.controller('MainCtrl', function ($scope,$http) {
 			$scope.uurl.manu = $scope.uurl.auto + "/2001:0db8:85a3:0000:0000:8a2e:0370:7334";
 			$scope.uurl.wget = '--inet6-only';
 		}
-		
-		// window.location.protocol = "http:"
-// 			window.location.host = "css-tricks.com"
-			// window.location.pathname = "example/index.html"
-		
-		$('#myPupup').modal('show');
+
+		if("CNAME" == valueRecord.type) {
+			$scope.uurl.manu = $scope.uurl.auto + "/CNAME_HERE";
+			$scope.uurl.wget = '';
+			$('#cnamePopup').modal('show');
+		} else {
+			$('#myPupup').modal('show');
+		}
 	}
 	
 	// Init modal:
 	$('#myPupup').modal({
+		show: false
+	})
+
+	$('#cnamePopup').modal({
 		show: false
 	})
 

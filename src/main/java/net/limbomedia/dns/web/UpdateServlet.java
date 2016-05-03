@@ -42,7 +42,13 @@ public class UpdateServlet extends HttpServlet {
 		String value = null;
 		if(parts == 2) {
 			// Detect IP
-			value = req.getRemoteAddr();
+			if (req.getHeader("x-forwarded-for") != null) {
+				value = req.getHeader("x-forwarded-for");
+			} else if (req.getHeader("x-real-ip") != null){
+				value = req.getHeader("x-real-ip");
+			} else {
+				value = req.getRemoteAddr();
+			}
 		}
 		else if (parts == 3) {
 			// Use submitted IP

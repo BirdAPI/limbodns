@@ -22,6 +22,7 @@ import org.xbill.DNS.NSRecord;
 import org.xbill.DNS.Name;
 import org.xbill.DNS.Record;
 import org.xbill.DNS.SOARecord;
+import org.xbill.DNS.CNAMERecord;
 import org.xbill.DNS.Zone;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -83,6 +84,9 @@ public class ZoneManagerImpl implements ZoneManager, ZoneProvider {
 				}
 				if(XType.AAAA.equals(xrec.getType())) {
 					r = new AAAARecord(new Name(xrec.getName(),nameZone), DClass.IN, 300L, Address.getByAddress(xrec.getValue()));
+				}
+				if (XType.CNAME.equals(xrec.getType())){
+					r = new CNAMERecord(new Name(xrec.getName(),nameZone), DClass.IN, 300L, new Name(xrec.getValue()));
 				}
 				if(r == null) {
 					L.error("Invalid/Unsupported record found: " + xrec);
